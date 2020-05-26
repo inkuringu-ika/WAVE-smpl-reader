@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smpl_reader", "smpl_reader\smpl_reader.csproj", "{BF2D2FFD-DDFD-4424-A947-1C3A63E6F09E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF2D2FFD-DDFD-4424-A947-1C3A63E6F09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF2D2FFD-DDFD-4424-A947-1C3A63E6F09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF2D2FFD-DDFD-4424-A947-1C3A63E6F09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF2D2FFD-DDFD-4424-A947-1C3A63E6F09E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2AD6E1B2-B394-4863-81C4-893B8E7BB98D}
+	EndGlobalSection
+EndGlobal

@@ -9,18 +9,31 @@ namespace smpl_reader
 {
     class Program
     {
+        private static BinaryReader wavfileread;
+
         static void Main(string[] args)
         {
+            if(args.Length == 0)
+            {
+                Console.WriteLine("Error: File not set.");
+                Environment.Exit(-1);
+            }
             var filename = @args[0];
-            //var filename = @"F:\任天堂ツール、音楽再生、変換\再生\.wav";
-            var wavfileread = new BinaryReader(new FileStream(filename, FileMode.Open));
+            try
+            {
+                wavfileread = new BinaryReader(new FileStream(filename, FileMode.Open));
+            }
+            catch
+            {
+                Console.WriteLine("Error: Failed to read the file.");
+                Environment.Exit(-1);
+            }
             if (Encoding.GetEncoding(20127).GetString(wavfileread.ReadBytes(4)) == "RIFF")
             {
                 //BitConverter.ToInt32(wavfileread.ReadBytes(4), 0).ToString()
                 wavfileread.BaseStream.Seek(4, SeekOrigin.Current);
                 if (Encoding.GetEncoding(20127).GetString(wavfileread.ReadBytes(4)) == "WAVE")
                 {
-                    //Console.WriteLine("reading...");
                     while (wavfileread.BaseStream.Position != wavfileread.BaseStream.Length)
                     {
                         var chunkid = Encoding.GetEncoding(20127).GetString(wavfileread.ReadBytes(4));
@@ -32,7 +45,10 @@ namespace smpl_reader
                             Console.WriteLine("channel_count: " + channel_count);
                             var sample_rate = BitConverter.ToInt32(wavfileread.ReadBytes(4), 0);
                             Console.WriteLine("sample_rate: " + sample_rate);
-                            wavfileread.BaseStream.Seek(fmt_bytes - 8, SeekOrigin.Current);
+                            wavfileread.BaseStream.Seek(6, SeekOrigin.Current);
+                            var bit = BitConverter.ToInt16(wavfileread.ReadBytes(2), 0);
+                            Console.WriteLine("bit: " + bit);
+                            wavfileread.BaseStream.Seek(fmt_bytes - 16, SeekOrigin.Current);
                         }
                         else if (chunkid == "smpl")
                         {
@@ -53,6 +69,16 @@ namespace smpl_reader
                     }
 
                 }
+                else
+                {
+                    Console.WriteLine("Error: Invalid file.");
+                    Environment.Exit(-1);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Error: Invalid file.");
+                Environment.Exit(-1);
             }
         }
     }

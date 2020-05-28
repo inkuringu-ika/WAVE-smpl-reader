@@ -16,7 +16,7 @@ namespace smpl_reader
             if(args.Length == 0)
             {
                 Console.WriteLine("Error: File not set.");
-                Environment.Exit(-1);
+                return;
             }
             var filename = @args[0];
             try
@@ -26,7 +26,7 @@ namespace smpl_reader
             catch
             {
                 Console.WriteLine("Error: Failed to read the file.");
-                Environment.Exit(-1);
+                return;
             }
             if (Encoding.GetEncoding(20127).GetString(wavfileread.ReadBytes(4)) == "RIFF")
             {
@@ -72,13 +72,13 @@ namespace smpl_reader
                 else
                 {
                     Console.WriteLine("Error: Invalid file.");
-                    Environment.Exit(-1);
+                    return;
                 }
             }
             else
             {
                 Console.WriteLine("Error: Invalid file.");
-                Environment.Exit(-1);
+                return;
             }
         }
     }
